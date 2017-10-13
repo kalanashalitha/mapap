@@ -16,7 +16,6 @@ public class Marker {
     private String name;
     private boolean draggable;
 
-
     public double getId() {
         return id;
     }
