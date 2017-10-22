@@ -19,5 +19,4 @@ export class LoginComponent implements OnInit {
   	this.name = "kalana";
   	this.router.navigate(['home']);
   }
-
 }

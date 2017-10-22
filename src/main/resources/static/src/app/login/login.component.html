@@ -1,9 +1,10 @@
+
 <md-card class="card-login">
 	<md-card-header>
 		<md-card-title><h3>Login to mapap</h3></md-card-title>
 	</md-card-header>
 	<md-card-content>
-		<form>
+		<!-- <form>
 		
 			<md-input-container>
 				<input [(ngModel)]="name"  [ngModelOptions]="{standalone: true}" mdInput/>
@@ -17,6 +18,7 @@
 			<md-card-actions>
 				<a (click)="login()" routerLinkActive="active" md-raised-button> Login</a>
 			</md-card-actions>
-		</form>
+		</form> -->
+		<div class="g-signin2" data-onsuccess="onSignIn"></div>
 	</md-card-content>
 </md-card>
