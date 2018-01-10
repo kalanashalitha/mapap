@@ -19,6 +19,9 @@
 				<a (click)="login()" routerLinkActive="active" md-raised-button> Login</a>
 			</md-card-actions>
 		</form> -->
-		<div class="g-signin2" data-onsuccess="onSignIn"></div>
+		<div id="google-login-button"  (click)="login()">login</div>
+		<!-- data-onsuccess="onSignIn" -->
 	</md-card-content>
 </md-card>
+
+<a href="#" (click)="signOut()">Sign out</a>

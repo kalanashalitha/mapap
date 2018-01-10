@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
-import { LoginComponent } from './login.component';
+import { UserComponent } from './user.component';
 import { MaterialModule } from '../material/material.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
@@ -13,8 +13,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     FormsModule,
     MaterialModule
   ],
-  declarations: [LoginComponent],
-  exports:[LoginComponent],
-  bootstrap: [LoginComponent]
+  declarations: [UserComponent],
+  exports:[UserComponent],
+  bootstrap: [UserComponent]
 })
-export class LoginModule { }
+export class UserModule { }
