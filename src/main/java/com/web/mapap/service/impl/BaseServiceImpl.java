@@ -28,12 +28,15 @@ public class BaseServiceImpl<Entity, ID extends String> implements BaseService<E
     
     @Override
     public Optional<Entity> getEntity(ID id) {
-        return repository.findById(id);
+        System.out.println("gggggggggggg"+id);
+        System.out.println(repository);
+        Optional<Entity> byId = repository.findById(id);
+        System.out.println(byId);return byId;
     }
 
     @Override
-    public void createEntity(Entity entity) {
-        repository.save(entity);
+    public Entity createEntity(Entity entity) {
+        return repository.save(entity);
     }
 
     @Override

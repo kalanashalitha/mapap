@@ -6,14 +6,21 @@ import com.google.api.client.http.HttpTransport;
 import com.google.api.client.http.javanet.NetHttpTransport;
 import com.google.api.client.json.JsonFactory;
 import com.google.api.client.json.jackson2.JacksonFactory;
+import com.web.mapap.model.User;
+import com.web.mapap.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.io.IOException;
+import java.net.URI;
 import java.security.GeneralSecurityException;
 import java.util.Collections;
+import java.util.Optional;
 
 /**
  * Created by Kalana Shalitha on 10/22/2017.
@@ -25,9 +32,11 @@ public class UserController {
 
     private static final HttpTransport httpTransport = new NetHttpTransport();
     private static final JsonFactory jsonFactory = new JacksonFactory();
+    @Autowired
+    private UserService userService;
 
     @RequestMapping(method = RequestMethod.POST,value ="/authenticate")
-    public void authenticateUser(@RequestBody String idToken) throws GeneralSecurityException, IOException {
+    public ResponseEntity<User> authenticateUser(@RequestBody String idToken) throws GeneralSecurityException, IOException {
         GoogleIdTokenVerifier verifier = new GoogleIdTokenVerifier.Builder(httpTransport, jsonFactory)
                 .setAudience(Collections.singletonList("968290368770-41286pviqm741nh77i2e7bcvc81p45qd.apps.googleusercontent.com"))
                 // Or, if multiple clients access the backend:
@@ -54,10 +63,28 @@ public class UserController {
             String givenName = (String) payload.get("given_name");
 
             // Use or store profile information
-            // ...
+            System.out.println("before"+userId);
 
+            Optional<User> maybeUser = userService.getUser(userId);
+            System.out.println(maybeUser);
+            if(maybeUser.isPresent()){
+                System.out.println("jjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj");
+                return ResponseEntity.ok().body(maybeUser.get());
+            } else {
+                System.out.println("kkkkkkkkkkkkkkkkkkkkkkkk");
+                User user = new User();
+                user.setEmail(email);
+                user.setFirstName(name);
+                user.setId(userId);
+                User createdUser = userService.createUser(user);
+                URI location = ServletUriComponentsBuilder
+                        .fromCurrentRequest().path(userId)
+                        .buildAndExpand(createdUser.getId()).toUri();
+                return ResponseEntity.created(location).build();
+            }
         } else {
             System.out.println("Invalid ID token.");
+            return ResponseEntity.badRequest().build();
         }
     }
 }

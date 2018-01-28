@@ -2,11 +2,13 @@ package com.web.mapap.model;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 /**
  * Created by Kalana Shalitha on 10/22/2017.
  */
-@Entity(name = "user")
+@Entity
+@Table(name="user")
 public class User {
     @Id
     private String id;

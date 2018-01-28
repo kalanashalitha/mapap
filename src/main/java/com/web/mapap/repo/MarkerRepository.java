@@ -15,7 +15,7 @@ import java.util.Optional;
  *
  * @author Kalana Shalitha
  */
-@org.springframework.stereotype.Repository
-public interface MarkerRepository<Entity extends Marker, ID> extends Repository<Entity, String>{
+//@org.springframework.stereotype.Repository
+public interface MarkerRepository<Entity extends Marker, ID>/* extends Repository<Entity, String>*/{
 
 }

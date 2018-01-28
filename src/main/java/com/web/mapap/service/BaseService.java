@@ -14,7 +14,7 @@ import java.util.Optional;
  */
 public interface BaseService<Entity, ID> extends Service {
     Optional<Entity> getEntity(ID id);
-    void createEntity(Entity entity);
+    Entity createEntity(Entity entity);
     void modifyEntity(Entity entity);
     void deleteEntity(Entity entity);
     Optional<List<Entity>> getAllEntities();
